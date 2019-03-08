@@ -1,0 +1,52 @@
+Implementing Dummynet to PF
+
+Dervišević Rajko
+email: dervish13@tilda.center
+github: dervish13
+irc nick: Dervish13
+GsoC mentor: Kristof Provost
+Sponsor/Mentor: Tilda Center / Goran Mekic
+
+1. Synopsis
+
+Goal of the project is to add dummynet option to PF by adding to pfctl_parser pipe and queue options. Than connect them to dummynet, and be able to have dummynet_io function inside pf. Along the way documenting work done.
+
+2. Related work
+
+Dummynet is already used with ipfw on freebsd and pf on Opnsense, and MacOS. So I have already existing examples of dummynet implementation and able to get familiar how dummynet is added to the code by looking at past commits on different platforms and different code
+
+3. Work required
+
+First step is adding parser options to pfctl parser. Currently before the application to Google Summer of Code, I have added pipe and queue options, with simple printf as output. As a proof of concept, and as part of getting familiar with the code base.
+
+Second step is to add dummynet entry to pf.c , so creation of pipe and queue is possible. At this point in the project, parser would just pass the option, and pf would accept it and just confirm given option. Whem dummynet_io is added, pf can push wanted packages trough dummynet.
+
+Idea is to have custom kernel and code written in a way, that default option in /etc/make.conf would be WITH_PF_DUMMYNET=NO , and for testing and further development can be switched to “YES” and enable dummynet use for PF. With that kind of architecture, normal pf would be used for any and all users that explicitly do not wish otherwise. After full implementation, with all options and when pf_dummynet passes all tests, it can be added as default to pf.
+
+After each finished step, writing documentation for the given step, how it is implemented, what each of the functions does, and in the end how dummynet is used from a user perspective.
+
+For current setup, I believe that there would be collision when pf and ipfw work together, and if provided goals go better and faster as planned, next step after all given tasks
+4. Timeline
+
+1st & 2nd week:
+	Continue work on pfctl parser, adding functionality to already added pipe/queue functions
+3rd & 4th week:
+	Integration of dummynet to pf.c
+5th & 6th week:
+
+7th & 8th week:
+
+9th & 10th week:
+	Testing dummynet, and final fixes to the code.
+
+11th week:
+	Writing final user documentation
+
+12th week:
+	Final steps, writing required reports for GsoC project
+
+5. About the applicant
+
+My name is Rajko Dervisevic, graduation student of telecomunications on Faculty of Technical Sciences and member of IT research lab Tilda Center.
+…?
+
