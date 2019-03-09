@@ -7,17 +7,21 @@ irc nick: Dervish13
 GsoC mentor: Kristof Provost
 Sponsor/Mentor: Tilda Center / Goran Mekic
 
-1. Synopsis
+1. Why dummynet?
 
-Goal of the project is to add dummynet option to PF by adding to pfctl_parser pipe and queue options. Than connect them to dummynet, and be able to have dummynet_io function inside pf. Along the way documenting work done.
+With integration of dummynet into the PF firewall, it gives us opportunity for bandwith control and bandwith management on the network. It can be used for jails on a host machine, or control flow of traffic on specific devices if pf and dummynet are running on the router. All this provides oportunity for better control of FreeBSD servers , but also provides use for individual FreeBSD users.
 
-2. Related work
+2. Project abstract
+
+Plan for implementation consists of adding to pfctl_parser pipe and queue options. Than connect them to dummynet, and be able to have dummynet_io function inside pf. Along the way documenting work done and provide good base for complete documentation.
+
+3. Related work
 
 Dummynet is already used with ipfw on freebsd and pf on Opnsense, and MacOS. So I have already existing examples of dummynet implementation and able to get familiar how dummynet is added to the code by looking at past commits on different platforms and different code
 
-3. Work required
+4. Technical details
 
-First step is adding parser options to pfctl parser. Currently before the application to Google Summer of Code, I have added pipe and queue options, with simple printf as output. As a proof of concept, and as part of getting familiar with the code base.
+First step is adding parser options to pfctl parser. Before the application to Google Summer of Code, I have added pipe and queue options to client side of pfctl parser, with simple printf as output. As a proof of concept, and as part of getting familiar with the code base.
 
 Second step is to add dummynet entry to pf.c , so creation of pipe and queue is possible. At this point in the project, parser would just pass the option, and pf would accept it and just confirm given option. Whem dummynet_io is added, pf can push wanted packages trough dummynet.
 
@@ -26,8 +30,10 @@ Idea is to have custom kernel and code written in a way, that default option in 
 After each finished step, writing documentation for the given step, how it is implemented, what each of the functions does, and in the end how dummynet is used from a user perspective.
 
 For current setup, I believe that there would be collision when pf and ipfw work together, and if provided goals go better and faster as planned, next step after all given tasks
-4. Timeline
+5. Timeline plan
 
+Pre GsoC:
+	Added pipe and queue options to pf parser and got familiar with the code base. And contacted future mentor for technical details and opinions about the project idea.
 1st & 2nd week:
 	Continue work on pfctl parser, adding functionality to already added pipe/queue functions
 3rd & 4th week:
@@ -45,8 +51,8 @@ For current setup, I believe that there would be collision when pf and ipfw work
 12th week:
 	Final steps, writing required reports for GsoC project
 
-5. About the applicant
+This plan is just an aproximation, depending of the flow of the project, details can slightly differ from the list
+6. About the applicant
 
 My name is Rajko Dervisevic, graduation student of telecomunications on Faculty of Technical Sciences and member of IT research lab Tilda Center.
 …?
-
